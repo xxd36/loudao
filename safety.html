@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全指南 - 楼道逃生</title>
+    <style>
+        :root {
+            --primary: #E74C3C;  /* 主色调-红色 */
+            --secondary: #3498DB; /* 副色调-蓝色 */
+            --dark: #2C3E50;    /* 深色文字 */
+            --light: #ECF0F1;   /* 浅色背景 */
+            --safety: #2ECC71;  /* 安全色 */
+            --warning: #F39C12; /* 警告色 */
+            --danger: #E74C3C;  /* 危险色 */
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        /* 安全指南内容 */
+        .safety-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+        
+        .safety-section {
+            margin-bottom: 40px;
+        }
+        
+        .safety-section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .safety-item {
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 4px solid var(--safety);
+            position: relative;
+        }
+        
+        .safety-item.warning {
+            border-left-color: var(--warning);
+        }
+        
+        .safety-item.danger {
+            border-left-color: var(--danger);
+        }
+        
+        .safety-item h3 {
+            color: var(--secondary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .safety-item h3:before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .safety-item.safety h3:before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232ECC71"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1.06 13.54L7.4 12l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41-5.64 5.66z"/></svg>');
+        }
+        
+        .safety-item.warning h3:before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23F39C12"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1 14h2v2h-2zm0-10h2v6h-2z"/></svg>');
+        }
+        
+        .safety-item.danger h3:before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23E74C3C"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm1.5 14h-3v-6h3v6zm-1.5-8c-.83 0-1.5-.67-1.5-1.5S11.17 5 12 5s1.5.67 1.5 1.5S12.83 8 12 8z"/></svg>');
+        }
+        
+        .safety-checklist {
+            background-color: #F8F9FA;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .safety-checklist h3 {
+            color: var(--primary);
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .checklist-item:before {
+            content: "✓";
+            color: var(--safety);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .emergency-contact {
+            background-color: #FFF3F3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .emergency-contact h3 {
+            color: var(--danger);
+            margin-top: 0;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .safety-content {
+                padding: 25px;
+            }
+            
+            .safety-item {
+                padding-left: 15px;
+                margin-left: -15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">楼道逃生</a>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="rules.html">游戏规则</a>
+                    <a href="safety.html" style="color: var(--primary);">安全指南</a>
+                    <a href="about.html">关于我们</a>
+                    <a href="contact.html">联系我们</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>安全指南</h1>
+            <p>安全第一，快乐游戏</p>
+        </div>
+    </section>
+
+    <!-- 安全指南内容 -->
+    <div class="container">
+        <div class="safety-content">
+            <section class="safety-section">
+                <h2>游戏前安全检查</h2>
+                
+                <div class="safety-item safety">
+                    <h3>场地选择</h3>
+                    <p>选择符合以下标准的楼道环境：</p>
+                    <ul>
+                        <li>光线充足，视野良好</li>
+                        <li>地面干燥、平整、无障碍物</li>
+                        <li>楼梯有稳固的扶手</li>
+                        <li>紧急出口畅通无阻</li>
+                        <li>有足够的活动空间（建议每人至少2平方米）</li>
+                    </ul>
+                </div>
+                
+                <div class="safety-item warning">
+                    <h3>危险区域识别</h3>
+                    <p>游戏前必须检查并标记以下危险区域，禁止在这些区域追逐：</p>
+                    <ul>
+                        <li>楼梯转角平台</li>
+                        <li>湿滑或不平整的地面</li>
+                        <li>靠近窗户或阳台的区域</li>
+                        <li>堆放杂物的通道</li>
+                        <li>任何可能造成绊倒或碰撞的区域</li>
+                    </ul>
+                </div>
+                
+                <div class="safety-checklist">
+                    <h3>安全检查清单</h3>
+                    <div class="checklist-item">确认所有参与者了解基本游戏规则和安全注意事项</div>
+                    <div class="checklist-item">移除场地内所有可能造成危险的障碍物</div>
+                    <div class="checklist-item">检查应急照明和出口标志是否正常工作</div>
+                    <div class="checklist-item">准备急救箱并放置在易于取用的位置</div>
+                    <div class="checklist-item">指定至少一名安全监督员负责观察游戏过程</div>
+                </div>
+            </section>
+            
+            <section class="safety-section">
+                <h2>游戏中的安全规则</h2>
+                
+                <div class="safety-item safety">
+                    <h3>基本行为准则</h3>
+                    <ul>
+                        <li>行走或慢跑，禁止全速奔跑</li>
+                        <li>上下楼梯时必须使用扶手</li>
+                        <li>禁止推搡、拉扯或其他身体接触</li>
+                        <li>追捕者只能轻触表示"抓捕"</li>
+                        <li>听到"停止"口令时必须立即停止所有动作</li>
+                    </ul>
+                </div>
+                
+                <div class="safety-item danger">
+                    <h3>严格禁止的行为</h3>
+                    <ul>
+                        <li>任何形式的打闹或危险动作</li>
+                        <li>故意阻挡他人行进路线</li>
+                        <li>在楼梯上追逐或快速移动</li>
+                        <li>攀爬扶手或跳跃台阶</li>
+                        <li>携带任何可能造成伤害的物品</li>
+                    </ul>
+                </div>
+                
+                <div class="safety-item warning">
+                    <h3>服装要求</h3>
+                    <ul>
+                        <li>穿着舒适的运动服装</li>
+                        <li>必须穿防滑的运动鞋（禁止穿拖鞋、凉鞋或高跟鞋）</li>
+                        <li>避免佩戴项链、手链等可能被勾住的饰品</li>
+                        <li>长发应扎起避免遮挡视线</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="safety-section">
+                <h2>应急处理</h2>
+                
+                <div class="safety-item danger">
+                    <h3>紧急情况处理</h3>
+                    <p>如发生以下情况，立即停止游戏并采取相应措施：</p>
+                    <ul>
+                        <li><strong>受伤：</strong>立即呼叫安全监督员，进行初步急救处理，必要时拨打急救电话</li>
+                        <li><strong>火灾：</strong>按照建筑物消防预案立即疏散，使用最近的安全出口</li>
+                        <li><strong>电力中断：</strong>保持冷静，使用应急照明，有序疏散</li>
+                        <li><strong>其他紧急情况：</strong>听从安全监督员或场地工作人员的指挥</li>
+                    </ul>
+                </div>
+                
+                <div class="emergency-contact">
+                    <h3>紧急联系方式</h3>
+                    <p>请确保所有参与者知晓以下紧急联系方式：</p>
+                    <p><strong>急救电话：</strong> 120</p>
+                    <p><strong>火警电话：</strong> 119</p>
+                    <p><strong>报警电话：</strong> 110</p>
+                </div>
+                
+                <div class="safety-item safety">
+                    <h3>游戏终止原则</h3>
+                    <p>出现以下情况时应立即终止游戏：</p>
+                    <ul>
+                        <li>有参与者受伤或身体不适</li>
+                        <li>场地条件发生变化（如突然停电、地面湿滑等）</li>
+                        <li>参与者不遵守安全规则且屡劝不听</li>
+                        <li>发生任何可能危及参与者安全的情况</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="safety-section">
+                <h2>特殊人群注意事项</h2>
+                
+                <div class="safety-item warning">
+                    <h3>未成年人参与</h3>
+                    <ul>
+                        <li>12岁以下儿童必须在成人监督下参与</li>
+                        <li>建议未成年人组与成人组分开游戏</li>
+                        <li>为未成年人选择更简单、更安全的游戏区域</li>
+                        <li>缩短游戏时间，增加休息频率</li>
+                    </ul>
+                </div>
+                
+                <div class="safety-item warning">
+                    <h3>身体条件限制</h3>
+                    <p>以下人群不建议参与楼道逃生游戏：</p>
+                    <ul>
+                        <li>有心脏病、哮喘等严重疾病史者</li>
+                        <li>孕妇</li>
+                        <li>近期接受过手术或受伤未愈者</li>
+                        <li>有平衡障碍或行动不便者</li>
+                        <li>任何身体状况不适合剧烈活动者</li>
+                    </ul>
+                    <p>如有疑问，请在参与前咨询医生意见。</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">关于我们</a>
+                <a href="contact.html">联系方式</a>
+                <a href="privacy.html">隐私政策</a>
+                <a href="safety.html">安全指南</a>
+            </div>
+            <p class="copyright">© 2025 楼道逃生游戏团队 | 健康安全的现实游戏体验</p>
+        </div>
+    </footer>
+</body>
+</html>

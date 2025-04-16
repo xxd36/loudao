@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 楼道逃生</title>
+    <style>
+        :root {
+            --primary: #E74C3C;  /* 主色调-红色 */
+            --secondary: #3498DB; /* 副色调-蓝色 */
+            --dark: #2C3E50;    /* 深色文字 */
+            --light: #ECF0F1;   /* 浅色背景 */
+            --accent: #F39C12;  /* 强调色 */
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            background-image: url('stairwell-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+        }
+        
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* 内容区块 */
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        
+        .content-section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        /* 游戏介绍 */
+        .game-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .game-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .game-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 团队展示 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+        }
+        
+        .member-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin: 10px 0 5px;
+        }
+        
+        .member-role {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--dark);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* 游戏特色 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .feature-item {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .feature-item h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        /* 联系我们 */
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .contact-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .game-intro {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid, .features-grid, .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">楼道逃生</a>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="rules.html">游戏规则</a>
+                    <a href="safety.html">安全指南</a>
+                    <a href="about.html" style="color: var(--primary);">关于我们</a>
+                    <a href="contact.html">联系我们</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>关于楼道逃生</h1>
+            <p>现实中的多人追逐逃生游戏，体验心跳加速的刺激感</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- 游戏介绍 -->
+        <section class="content-section">
+            <h2>游戏介绍</h2>
+            <div class="game-intro">
+                <div>
+                    <p>《楼道逃生》是一款在真实楼道环境中进行的多人追逐逃生游戏，玩家分为"逃生者"和"追捕者"两组，在精心设计的游戏规则下展开紧张刺激的对抗。</p>
+                    <p>不同于电子游戏，楼道逃生让您在现实空间中体验真实的追逐快感，同时锻炼身体反应能力和团队协作能力。</p>
+                    <p>最新4.0版本优化了游戏规则，增加了多种游戏模式，为玩家带来更丰富的游戏体验！</p>
+                    <a href="rules.html" class="btn" style="display: inline-block; padding: 10px 25px; background: var(--primary); color: white; text-decoration: none; border-radius: 5px; margin-top: 15px;">查看游戏规则</a>
+                </div>
+                <div class="game-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发团队 -->
+        <section class="content-section">
+            <h2>开发团队</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-name">小小弟36</div>
+                    <div class="member-role">程序员 & 主设计师</div>
+                    <div class="social-links">
+                        <a href="https://space.bilibili.com/651334705" target="_blank" rel="noopener noreferrer" title="Bilibili">📺</a>
+                        <a href="mailto:QQ:3688461639" title="QQ">✉️</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-name">DeepSeek 团队</div>
+                    <div class="member-role">网页设计</div>
+                    <div class="social-links">
+                        <a href="https://chat.deepseek.com/" title="官网">🌐</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-name">安全专家组</div>
+                    <div class="member-role">安全规则顾问</div>
+                    <div class="social-links">
+                        <a href="https://chat.deepseek.com/" title="官网">🌐</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 游戏特色 -->
+        <section class="content-section">
+            <h2>游戏特色</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>真实体验</h3>
+                    <p>在真实的楼道环境中进行游戏，感受电子游戏无法提供的沉浸式体验</p>
+                </div>
+                <div class="feature-item">
+                    <h3>团队协作</h3>
+                    <p>培养团队合作精神，逃生者需要相互配合才能成功逃脱</p>
+                </div>
+                <div class="feature-item">
+                    <h3>体能锻炼</h3>
+                    <p>在游戏中自然锻炼身体素质和反应能力</p>
+                </div>
+                <div class="feature-item">
+                    <h3>多种模式</h3>
+                    <p>提供经典模式、限时挑战、团队竞技等多种玩法</p>
+                </div>
+                <div class="feature-item">
+                    <h3>安全第一</h3>
+                    <p>完善的游戏规则确保所有参与者的安全</p>
+                </div>
+                <div class="feature-item">
+                    <h3>社交互动</h3>
+                    <p>结识新朋友，增进与老朋友的默契</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我们 -->
+        <section class="content-section">
+            <h2>联系我们</h2>
+            <div class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>电子邮件</h3>
+                    <p><a href="mailto:xxd20150616@163.com">xxd20150616@163.com</a></p>
+                    <p>客服支持 & 问题反馈</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>社交媒体</h3>
+                    <p><a href="https://space.bilibili.com/651334705" target="_blank">Bilibili 官方账号</a></p>
+                    <p>获取最新游戏动态</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">👥</div>
+                    <h3>玩家社区</h3>
+                    <p><a href="#">QQ群：905238969</a></p>
+                    <p>加入玩家讨论</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">关于我们</a>
+                <a href="contact.html">联系方式</a>
+                <a href="privacy.html">隐私政策</a>
+                <a href="safety.html">安全指南</a>
+            </div>
+            <p class="copyright">© 2025 楼道逃生游戏团队 版权所有 | 版本：v4.2.1</p>
+        </div>
+    </footer>
+</body>
+</html>

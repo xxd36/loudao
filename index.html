@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楼道逃生 - 现实中的多人追逐游戏</title>
+    <style>
+        :root {
+            --primary: #E74C3C;  /* 主色调-红色 */
+            --secondary: #3498DB; /* 副色调-蓝色 */
+            --dark: #2C3E50;    /* 深色文字 */
+            --light: #ECF0F1;   /* 浅色背景 */
+            --accent: #F39C12;  /* 强调色 */
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('stairwell-action.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        /* 特色区域 */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* 游戏预览 */
+        .game-preview {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+        
+        .preview-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .preview-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .preview-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 规则摘要 */
+        .rules-summary {
+            padding: 80px 0;
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .rule-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+        }
+        
+        .rule-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        /* 行动号召 */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 80%;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    楼道逃生
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="rules.html">游戏规则</a>
+                    <a href="safety.html">安全指南</a>
+                    <a href="about.html">关于我们</a>
+                    <a href="contact.html">联系我们</a>
+                </div>
+                <a href="rules.html" class="btn">立即体验</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1>体验现实中的心跳加速</h1>
+            <p>《楼道逃生》是一款在真实楼道环境中进行的多人追逐游戏，带给你电子游戏无法提供的紧张刺激和团队协作体验</p>
+            <div class="hero-btns">
+                <a href="rules.html" class="btn">了解规则</a>
+                <a href="safety.html" class="btn btn-outline">安全指南</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色区域 -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>为什么选择楼道逃生？</h2>
+                <p>一款结合体能锻炼、策略思考和团队协作的现实游戏</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏃</div>
+                    <h3>真实体验</h3>
+                    <p>在真实的楼道环境中奔跑、躲藏和追逐，感受最纯粹的游戏乐趣</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>社交互动</h3>
+                    <p>与朋友组队或结识新伙伴，培养团队默契和沟通能力</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>策略思考</h3>
+                    <p>制定逃生路线和追捕策略，锻炼快速决策和应变能力</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>多种模式</h3>
+                    <p>经典逃生、限时挑战、团队竞技等多种玩法选择</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>安全第一</h3>
+                    <p>完善的规则体系确保所有参与者的安全</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>竞技乐趣</h3>
+                    <p>记录游戏数据，挑战成为顶级逃生大师</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏预览 -->
+    <section class="game-preview">
+        <div class="container">
+            <div class="preview-container">
+                <div>
+                    <h2>现实中的游戏体验</h2>
+                    <p>《楼道逃生》完全在现实环境中进行，无需任何电子设备。玩家只需遵守简单的规则，就能在楼道中展开紧张刺激的追逐战。</p>
+                    <p>最新4.0版本引入了更多创新玩法，包括特殊技能系统和多场景切换，让每场游戏都充满新鲜感。</p>
+                    <a href="about.html" class="btn" style="margin-top: 20px;">了解更多</a>
+                </div>
+                <div class="preview-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 规则摘要 -->
+    <section class="rules-summary">
+        <div class="container">
+            <div class="section-title">
+                <h2>简单规则，无限乐趣</h2>
+                <p>易于上手但难以精通的游戏机制</p>
+            </div>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3>基本规则</h3>
+                    <p>逃生者需要在规定时间内逃出指定出口，追捕者则要尽可能多地抓住逃生者。</p>
+                </div>
+                <div class="rule-card">
+                    <h3>角色分配</h3>
+                    <p>游戏开始前随机分配角色，通常比例为1名追捕者对应3-4名逃生者。</p>
+                </div>
+                <div class="rule-card">
+                    <h3>安全准则</h3>
+                    <p>禁止推搡、危险动作；不能离开指定游戏区域；追捕者不能长时间守在同一楼层。</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px;">
+                <a href="rules.html" style="color: var(--primary); font-weight: bold; font-size: 1.1rem;">查看完整游戏规则 →</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- 行动号召 -->
+    <section class="cta">
+        <div class="container">
+            <h2>准备好开始你的逃生之旅了吗？</h2>
+            <p>召集你的朋友，选择一个安全的场地，立即体验这款令人心跳加速的现实游戏</p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="rules.html" class="btn">查看规则</a>
+                <a href="contact.html" class="btn btn-outline">联系我们</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>游戏相关</h3>
+                    <ul>
+                        <li><a href="rules.html">游戏规则</a></li>
+                        <li><a href="safety.html">安全指南</a></li>
+                        <li><a href="about.html">游戏历史</a></li>
+                        <li><a href="#">游戏技巧</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <ul>
+                        <li><a href="about.html">团队介绍</a></li>
+                        <li><a href="#">发展历程</a></li>
+                        <li><a href="#">媒体报道</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>帮助中心</h3>
+                    <ul>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="privacy.html">隐私政策</a></li>
+                        <li><a href="#">使用条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <p>获取最新游戏动态和活动信息</p>
+                    <div class="social-links">
+                        <a href="https://space.bilibili.com/651334705" title="B站">B</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 楼道逃生游戏团队 版权所有 | 版本 v4.2.1</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

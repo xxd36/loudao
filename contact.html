@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 楼道逃生</title>
+    <style>
+        :root {
+            --primary: #E74C3C;  /* 主色调-红色 */
+            --secondary: #3498DB; /* 副色调-蓝色 */
+            --dark: #2C3E50;    /* 深色文字 */
+            --light: #ECF0F1;   /* 浅色背景 */
+            --accent: #F39C12;  /* 强调色 */
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        /* 联系内容 */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h2 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info p {
+            margin: 10px 0;
+        }
+        
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* 反馈表单 */
+        .feedback-form {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #C0392B;
+        }
+        
+        /* 常见问题 */
+        .faq {
+            margin-bottom: 60px;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            color: var(--secondary);
+            font-weight: 500;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .faq-answer.show {
+            display: block;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .feedback-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">楼道逃生</a>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="rules.html">游戏规则</a>
+                    <a href="safety.html">安全指南</a>
+                    <a href="about.html">关于我们</a>
+                    <a href="contact.html" style="color: var(--primary);">联系我们</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>联系我们</h1>
+            <p>如有任何问题或建议，欢迎随时与我们联系</p>
+        </div>
+    </section>
+
+    <!-- 联系内容 -->
+    <div class="container">
+        <div class="contact-content">
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h2>电子邮件</h2>
+                <div class="contact-info">
+                    <p><strong>客服支持：</strong></p>
+                    <p><a href="mailto:support@loudaotaosheng.com">xxd20150616@163.com</a></p>
+                    <p><strong>商务合作：</strong></p>
+                    <p><a href="mailto:business@loudaotaosheng.com">xxd20150616@163.com</a></p>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h2>社交媒体</h2>
+                <div class="contact-info">
+                    <p><strong>B站：</strong></p>
+                    <p><a href="https://space.bilibili.com/651334705" target="_blank">楼道逃生官方账号</a></p>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">👨‍💻</div>
+                <h2>开发者联系</h2>
+                <div class="contact-info">
+                    <p><strong>主开发者：</strong></p>
+                    <p><a href="https://space.bilibili.com/651334705" target="_blank">小小弟36</a></p>
+                    <p><strong>邮箱：</strong></p>
+                    <p><a href="mailto:xxd20150616@163.com">xxd20150616@163.com</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 反馈表单 -->
+        <div class="feedback-form">
+            <h2>问题反馈</h2>
+            <p>请填写以下表单，我们将尽快回复您</p>
+            
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">您的姓名</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">主题</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">请选择...</option>
+                        <option value="game-rules">游戏规则咨询</option>
+                        <option value="safety">安全问题</option>
+                        <option value="bug">BUG反馈</option>
+                        <option value="suggestion">改进建议</option>
+                        <option value="cooperation">商务合作</option>
+                        <option value="other">其他问题</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">详细内容</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="error-code">错误代码（如有）</label>
+                    <input type="text" id="error-code" name="error-code" placeholder="例如：0x00000001">
+                </div>
+                
+                <button type="submit" class="submit-btn">提交反馈</button>
+            </form>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="faq">
+            <h2>常见问题</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">如何组织一场楼道逃生游戏？<span>+</span></h3>
+                <div class="faq-answer">
+                    <p>1. 选择一个安全的多层楼道环境，确保没有危险障碍物</p>
+                    <p>2. 确定参与人数，按照1:3-4的比例分配追捕者和逃生者</p>
+                    <p>3. 设置明确的游戏边界和时间限制</p>
+                    <p>4. 游戏前向所有参与者讲解规则和安全注意事项</p>
+                    <p>5. 指定一名裁判监督游戏过程</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">反馈问题后多久能得到回复？<span>+</span></h3>
+                <div class="faq-answer">
+                    <p>我们通常会在1-3个工作日内回复您的邮件。如果是紧急安全问题，请标注"紧急"字样，我们会优先处理。</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">如何成为官方认证的游戏组织者？<span>+</span></h3>
+                <div class="faq-answer">
+                    <p>如果您希望在学校或社区组织官方认证的楼道逃生活动，请发送邮件至xxd20150616@163.com，内容包括：</p>
+                    <p>- 您的组织/机构名称</p>
+                    <p>- 预计参与人数</p>
+                    <p>- 活动场地描述</p>
+                    <p>- 您的联系方式</p>
+                    <p>我们的团队会与您联系并提供认证流程。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">关于我们</a>
+                <a href="contact.html">联系方式</a>
+                <a href="privacy.html">隐私政策</a>
+                <a href="safety.html">安全指南</a>
+            </div>
+            <p class="copyright">© 2025 楼道逃生游戏团队 | 健康安全的现实游戏体验</p>
+        </div>
+    </footer>
+
+    <script>
+        // 常见问题展开/收起
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.parentElement.querySelector('.faq-answer');
+                const isOpen = answer.classList.contains('show');
+                
+                // 关闭所有其他答案
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.classList.remove('show');
+                    item.previousElementSibling.querySelector('span').textContent = '+';
+                });
+                
+                // 切换当前答案
+                if (!isOpen) {
+                    answer.classList.add('show');
+                    question.querySelector('span').textContent = '-';
+                }
+            });
+        });
+        
+        // 表单提交
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的反馈！我们会尽快处理并与您联系。');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

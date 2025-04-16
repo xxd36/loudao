@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏规则 - 楼道逃生</title>
+    <style>
+        :root {
+            --primary: #E74C3C;  /* 红色强调 */
+            --secondary: #3498DB; /* 蓝色辅助 */
+            --dark: #2C3E50;     /* 深色文字 */
+            --light: #ECF0F1;    /* 浅色背景 */
+            --accent: #F39C12;   /* 橙色点缀 */
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        
+        /* 规则内容 */
+        .rules-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        
+        .rule-section {
+            margin-bottom: 40px;
+        }
+        
+        .rule-section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .rule-item {
+            margin-bottom: 25px;
+        }
+        
+        .rule-item h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rule-item h3:before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .rule-item p {
+            margin-left: 25px;
+        }
+        
+        .warning-box {
+            background-color: #FFF3F3;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        /* 游戏模式 */
+        .game-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .mode-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .mode-card h3 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .rules-content {
+                padding: 25px;
+            }
+            
+            .rule-item h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">楼道逃生</a>
+                <div class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="rules.html" style="color: var(--primary);">游戏规则</a>
+                    <a href="safety.html">安全指南</a>
+                    <a href="about.html">关于我们</a>
+                    <a href="contact.html">联系我们</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>楼道逃生游戏规则</h1>
+            <p>版本4.0 - 最后更新：2023年10月</p>
+        </div>
+    </section>
+
+    <!-- 规则内容 -->
+    <div class="container">
+        <div class="rules-content">
+            <section class="rule-section">
+                <h2>基本规则</h2>
+                
+                <div class="rule-item">
+                    <h3>游戏目标</h3>
+                    <p>逃生者需要在规定时间内逃出指定出口，追捕者则要尽可能多地抓住逃生者。</p>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>游戏区域</h3>
+                    <p>游戏在预先选定的多层楼道内进行，边界必须明确标记，所有玩家不得越界。</p>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>角色分配</h3>
+                    <p>游戏开始前随机分配角色，通常比例为1名追捕者对应3-4名逃生者。</p>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>重要提示：</strong> 游戏开始前必须检查场地安全，移除所有可能造成危险的障碍物，确保逃生路线畅通。
+                </div>
+            </section>
+            
+            <section class="rule-section">
+                <h2>角色规则</h2>
+                
+                <div class="rule-item">
+                    <h3>逃生者规则</h3>
+                    <p>逃生者必须在规定时间内找到并到达指定出口，过程中可以：</p>
+                    <ul>
+                        <li>利用楼道结构躲避追捕</li>
+                        <li>与其他逃生者合作</li>
+                        <li>使用预先约定的特殊道具（如安全标记）</li>
+                    </ul>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>追捕者规则</h3>
+                    <p>追捕者需要在不违反规则的前提下抓住逃生者：</p>
+                    <ul>
+                        <li>只能轻触肩膀才算有效抓捕</li>
+                        <li>不能长时间(超过2分钟)守在同一楼层（防"狗楼"）</li>
+                        <li>不能阻挡逃生出口</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="rule-section">
+                <h2>禁止行为</h2>
+                
+                <div class="rule-item">
+                    <h3>安全禁止</h3>
+                    <p>以下行为严格禁止，违者将被取消游戏资格：</p>
+                    <ul>
+                        <li>任何形式的推搡、冲撞等危险动作</li>
+                        <li>故意损坏场地设施</li>
+                        <li>在湿滑或光线不足的区域追逐</li>
+                        <li>携带危险物品参与游戏</li>
+                    </ul>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>游戏禁止</h3>
+                    <p>以下行为违反游戏公平性：</p>
+                    <ul>
+                        <li>串楼（进入非游戏指定楼栋）</li>
+                        <li>偷看或泄露其他玩家位置</li>
+                        <li>修改或破坏游戏标记</li>
+                        <li>使用电子设备获取不公平优势</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="rule-section">
+                <h2>游戏模式</h2>
+                <p>楼道逃生4.0提供多种游戏模式选择：</p>
+                
+                <div class="game-modes">
+                    <div class="mode-card">
+                        <h3>经典模式</h3>
+                        <p>标准逃生玩法，逃生者需在15分钟内找到出口，追捕者需尽可能阻止逃生者。</p>
+                        <p><strong>时长：</strong> 无限</p>
+                        <p><strong>适合：</strong> 新手玩家</p>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <h3>限时挑战</h3>
+                        <p>逃生者只有10分钟时间，追捕者数量增加，难度提升。</p>
+                        <p><strong>时长：</strong> 15-20分钟</p>
+                        <p><strong>适合：</strong> 有经验玩家</p>
+                    </div>
+                    
+                    <div class="mode-card">
+                        <h3>团队竞技</h3>
+                        <p>分组对抗，统计各队逃生人数和抓捕数量决出胜负。</p>
+                        <p><strong>时长：</strong> 20-30分钟</p>
+                        <p><strong>适合：</strong> 团队活动</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="rule-section">
+                <h2>胜负判定</h2>
+                
+                <div class="rule-item">
+                    <h3>逃生者胜利条件</h3>
+                    <p>在规定时间内，超过50%的逃生者成功到达指定出口。</p>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>追捕者胜利条件</h3>
+                    <p>在规定时间内，抓捕超过50%的逃生者，或阻止逃生者达到胜利条件。</p>
+                </div>
+                
+                <div class="rule-item">
+                    <h3>平局情况</h3>
+                    <p>当逃生者和追捕者都刚好达到50%时视为平局，可加赛一轮或共同获胜。</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">关于我们</a>
+                <a href="contact.html">联系方式</a>
+                <a href="privacy.html">隐私政策</a>
+                <a href="safety.html">安全指南</a>
+            </div>
+            <p class="copyright">© 2025 楼道逃生游戏团队 | 健康安全的现实游戏体验</p>
+        </div>
+    </footer>
+</body>
+</html>
